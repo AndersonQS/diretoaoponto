@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace diretoaoponto.Controllers
 {
-  [Route("api/[controller]")]
+  [Route("api/job-vacancies")]
   [ApiController]
   public class JobVacanciesController : ControllerBase
   {
