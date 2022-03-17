@@ -6,6 +6,7 @@ using diretoaoponto.Entities;
 using diretoaoponto.Models;
 using diretoaoponto.Persistence;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace diretoaoponto.Controllers
 {
@@ -13,8 +14,8 @@ namespace diretoaoponto.Controllers
   [ApiController]
   public class JobVacanciesController : ControllerBase
   {
-    private readonly DeveJobsContext _context;
-    public JobVacanciesController(DeveJobsContext context)
+    private readonly DevJobsContext _context;
+    public JobVacanciesController(DevJobsContext context)
     {
       _context = context;
     }
@@ -28,7 +29,9 @@ namespace diretoaoponto.Controllers
     [HttpGet("{id}")]
     public IActionResult GetById(int id)
     {
-      var jobVacancy = _context.JobVacancies.SingleOrDefault(jv => jv.Id == id);
+      var jobVacancy = _context.JobVacancies.
+      Include(jv => jv.Applications).
+      SingleOrDefault(jv => jv.Id == id);
 
       if (jobVacancy == null)
         return NotFound();
@@ -47,6 +50,7 @@ namespace diretoaoponto.Controllers
           model.SalaryRange
       );
       _context.JobVacancies.Add(jobVacancy);
+      _context.SaveChanges();
       return CreatedAtAction("GetById", new { id = jobVacancy.Id }, jobVacancy);
     }
 
@@ -58,6 +62,7 @@ namespace diretoaoponto.Controllers
         if (jobVacancy == null)
         return NotFound();
         jobVacancy.Update(model.Title, model.Description);
+        _context.SaveChanges();
         
         return NoContent();
     }
