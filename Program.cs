@@ -1,9 +1,16 @@
 using diretoaoponto.Persistence;
+using diretoaoponto.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddSingleton<DeveJobsContext>();
+var connectionString = builder.Configuration.GetConnectionString("DevJobsCs");
+
+builder.Services.AddDbContext<DevJobsContext>(options =>
+    options.UseSqlServer(connectionString));
+builder.Services.AddScoped<IJobVacancyRepository, JobVacancyRepository>();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

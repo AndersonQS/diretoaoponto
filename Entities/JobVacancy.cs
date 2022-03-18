@@ -16,7 +16,7 @@ namespace diretoaoponto.Entities
       SalaryRange = salaryRange;
 
       CreatedAt = DateTime.Now;
-      Application = new List<JobApplication>();
+      Applications = new List<JobApplication>();
     }
 
     public int Id { get; private set; }
@@ -27,7 +27,7 @@ namespace diretoaoponto.Entities
     public bool IsRemote { get; private set; }
     public string SalaryRange { get; private set; }
     public DateTime CreatedAt { get; private set; }
-    public List<JobApplication> Application { get; private set; }
+    public List<JobApplication> Applications { get; private set; }
 
     public void Update(string title, string description)
     {
