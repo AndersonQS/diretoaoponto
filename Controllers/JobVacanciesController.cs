@@ -38,6 +38,23 @@ namespace diretoaoponto.Controllers
 
       return Ok(jobVacancy);
     }
+    ///POST api/job-vacancies
+    ///<summary>
+    /// Cadastrar uma vaga de emprego.
+    ///</summary>
+    ///<remarks>
+    /// {
+    ///"title": "dev c#",
+    ///"description": "vaga para jr",
+    ///"company": "lux",
+    ///"isRemote": true,
+    ///"salaryRange": "2000"
+    ///}
+    ///</remarks>
+    ///<param name="model">Dados da vaga.</param>
+    ///<returns>Objeto recém-criado.</returns>
+    ///<response code="201">Sucesso.</response>
+    ///<response code="400">dados invalidos.</response>
     [HttpPost]
     public IActionResult Post(AddJobVacancyInputModel model)
     {
@@ -48,6 +65,9 @@ namespace diretoaoponto.Controllers
           model.IsRemote,
           model.SalaryRange
       );
+
+      if (jobVacancy.Title.Length > 30)
+          return BadRequest("Título precisa ter menos de 30 caracteres;");
       _repository.Add(jobVacancy);
       return CreatedAtAction("GetById", new { id = jobVacancy.Id }, jobVacancy);
     }
@@ -55,16 +75,16 @@ namespace diretoaoponto.Controllers
     [HttpPut("{id}")]
     public IActionResult Put(int id, UpdateJobVacancyInputModel model)
     {
-        var jobVacancy = _repository.GetById(id);
+      var jobVacancy = _repository.GetById(id);
 
-        if (jobVacancy == null)
+      if (jobVacancy == null)
         return NotFound();
-        jobVacancy.Update(model.Title, model.Description);
+      jobVacancy.Update(model.Title, model.Description);
 
-        _repository.Update(jobVacancy);
-        
-        
-        return NoContent();
+      _repository.Update(jobVacancy);
+
+
+      return NoContent();
     }
   }
 }

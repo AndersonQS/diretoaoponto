@@ -6,7 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>9631d7e4-b474-4195-b14b-a0a45b62e13f</UserSecretsId>
   </PropertyGroup>
-
+   <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

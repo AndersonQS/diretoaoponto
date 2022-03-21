@@ -34,9 +34,9 @@ namespace diretoaoponto.Persistence.Repositories
 
     public JobVacancy GetById(int id)
     {
-      return _context.JobVacancies.
-      Include(jv => jv.Applications).
-      SingleOrDefault(jv => jv.Id == id);
+      return _context.JobVacancies
+          .Include(jv => jv.Applications)
+          .SingleOrDefault(jv => jv.Id == id);
     }
 
     public void Update(JobVacancy jobVacancy)

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>diretoaoponto</name>
+    </assembly>
+    <members>
+        <member name="M:diretoaoponto.Controllers.JobVacanciesController.Post(diretoaoponto.Models.AddJobVacancyInputModel)">
+            POST api/job-vacancies
+            <summary>
+             Cadastrar uma vaga de emprego.
+            </summary>
+            <remarks>
+             {
+            "title": "dev c#",
+            "description": "vaga para jr",
+            "company": "lux",
+            "isRemote": true,
+            "salaryRange": "2000"
+            }
+            </remarks>
+            <param name="model">Dados da vaga.</param>
+            <returns>Objeto recém-criado.</returns>
+            <response code="201">Sucesso.</response>
+            <response code="400">dados invalidos.</response>
+        </member>
+    </members>
+</doc>
